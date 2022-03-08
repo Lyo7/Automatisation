@@ -1,6 +1,8 @@
 package TestsClasses;
 
 import PagesClasses.HomePage;
+import PagesClasses.ShopPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,25 +20,17 @@ public class MainTest {
 
     //variables
     WebDriver driverFire; WebDriver driverEd; WebDriver driverChr;
-    String [] driverEdge = {"C:\\Users\\Linzzeth\\Documents\\Linzzeth\\Stage\\webDrivers\\msedgedriver.exe","webdriver.edge.driver"};
-    String [] driverFirefox = {"C:\\Users\\Linzzeth\\Documents\\Linzzeth\\Stage\\webDrivers\\geckodriver.exe", "webdriver.gecko.driver"};
-    String [] driverChrome = {"C:\\Users\\Linzzeth\\Documents\\Linzzeth\\Stage\\webDrivers\\chromedriver.exe","webdriver.chrome.driver"};
     String url = "https://benensimone.com/";
     HomePage click;
+    ShopPage shop;
 
     @Before
 
     public void setUp(){
 
-
-        System.setProperty(driverEdge[1], driverEdge[0]);
-        System.out.println("Edge a ete pris en compte comme navigateur");
-
-        System.setProperty(driverFirefox[1], driverFirefox[0]);
-        System.out.println("fireFox a ete pris en compte comme navigateur");
-
-        System.setProperty(driverChrome[1], driverChrome[0]);
-        System.out.println("Chrome a ete pris en compte comme navigateur");
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.edgedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
 
         driverEd = new EdgeDriver();
         driverFire = new FirefoxDriver();
@@ -45,7 +39,9 @@ public class MainTest {
         driverEd.get(url);
         driverFire.get(url);
         driverChr.get(url);
+        System.out.println("antes de llamar constructor");
         click = new HomePage(driverEd, driverFire, driverChr);
+        shop = new ShopPage(driverEd, driverFire, driverChr);
 
 
     }
@@ -59,8 +55,23 @@ public class MainTest {
             System.out.println(getBtn);
             click.versHome(url);
             click.clickBtnCategory();
-            getBtn = click.getBtnCategory();
-            System.out.println(getBtn);
+            String getBtnC = click.getBtnCategory();
+            System.out.println(getBtnC);
+            click.versHome(url);
+            click.clickBtnProduct();
+            String getBtnP = click.getBtnProduct();
+            System.out.println(getBtnP);
+            click.versHome(url);
+            click.clickBtnMore();
+            String getBtnMore = click.getBtnMore();
+            System.out.println(getBtnMore);
+            click.versHome(url);
+            click.btnOntdek();
+            String btnOntdek = click.getBtnOntdek();
+            System.out.println(btnOntdek);
+            click.versHome(url);
+
+            shop.clickWen();
 
         }
 
@@ -69,7 +80,7 @@ public class MainTest {
     public void dowm(){
         driverEd.quit();
         driverFire.quit();
-        //driverChr.quit();
+        driverChr.quit();
         }
 
 }
