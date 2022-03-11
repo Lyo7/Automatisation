@@ -14,6 +14,8 @@ public class HomePage {
     private WebDriver driverFire; WebDriver driverEd; WebDriver driverChr;
     private By btnShop = By.cssSelector("a.btn.arrow");
     private By btnOntdek = By.cssSelector(".favorieten > div:nth-child(1) > div:nth-child(1) > a:nth-child(3)");
+    private By btnCookies = By.cssSelector("body > div.cookiePopup > button.btn.small.outline.no");
+    private String url = "https://benensimone.com/";
 
     //private By btnCategory = By.cssSelector("a.btn.arrow.blue");
 
@@ -27,9 +29,17 @@ public class HomePage {
         this.driverFire.manage().window().maximize();
         this.driverChr.manage().window().maximize();
 
+        this.driverEd.get(url);
+        this.driverFire.get(url);
+        this.driverChr.get(url);
+
+        driverEd.findElement(btnCookies).click();
+        driverFire.findElement(btnCookies).click();
+        driverChr.findElement(btnCookies).click();
+
     }
 
-    public void versHome(String url){
+    public void versHome(){
         driverEd.get(url);
         driverFire.get(url);
         driverChr.get(url);
