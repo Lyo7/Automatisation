@@ -27,6 +27,7 @@ public class MainTest {
     ShopPage shop;
     OverOns over;
     ContactPage contact;
+    String setName = "Test"; String setEmail = "test@gmail.com"; String setDescription= "Ceci est la description du formulaire de Test";
 
     @Before
 
@@ -88,7 +89,7 @@ public class MainTest {
             over.clickOntdek();
             over.versOver();
 
-            contact = new ContactPage(driverEd, driverFire, driverChr);
+            contact = new ContactPage(driverEd, driverFire, driverChr, setName, setEmail, setDescription);
             contact.remplirForm();
         }
 

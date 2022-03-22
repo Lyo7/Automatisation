@@ -19,6 +19,8 @@ public class HomePage {
 
     //private By btnCategory = By.cssSelector("a.btn.arrow.blue");
 
+    public HomePage (){}
+
 
     public HomePage(WebDriver driverFire, WebDriver driverEd, WebDriver driverChr){
         System.out.println("constructor");
